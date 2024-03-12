@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mystic.ycc.blog.dao.ConfigDao">
+    <resultMap id="BaseResultMap" type="com.mystic.ycc.blog.entity.Config">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="typeName" jdbcType="VARCHAR" property="typename"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="content_id" jdbcType="INTEGER" property="contentId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , content, `type`, typeName, avatar, content_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from config
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from config
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.Config"
+            useGeneratedKeys="true">
+        insert into config (content, `type`, typeName,
+                            avatar, content_id)
+        values (#{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR},
+                #{avatar,jdbcType=VARCHAR}, #{contentId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.Config"
+            useGeneratedKeys="true">
+        insert into config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="content != null">
+                content,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="typename != null">
+                typeName,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="contentId != null">
+                content_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="typename != null">
+                #{typename,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="contentId != null">
+                #{contentId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mystic.ycc.blog.entity.Config">
+        update config
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="typename != null">
+                typeName = #{typename,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="contentId != null">
+                content_id = #{contentId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mystic.ycc.blog.entity.Config">
+        update config
+        set content    = #{content,jdbcType=VARCHAR},
+            `type`     = #{type,jdbcType=INTEGER},
+            typeName   = #{typename,jdbcType=VARCHAR},
+            avatar     = #{avatar,jdbcType=VARCHAR},
+            content_id = #{contentId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getConfig" resultType="com.mystic.ycc.blog.bean.ConfigVo">
+        <if test="type==4">
+            select a.id,b.introduction as content,a.type,a.avatar,a.content as id from config a left join
+            circle_info b on a.content = b.id where a.type=4
+        </if>
+        <if test="type!=4">
+            select *
+            from config where type=#{type}
+        </if>
+    </select>
+</mapper>

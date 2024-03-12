@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mystic.ycc.blog.dao.ImgInfoDao">
+    <resultMap id="BaseResultMap" type="com.mystic.ycc.blog.entity.ImgInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="filename" jdbcType="VARCHAR" property="filename"/>
+        <result column="filePath" jdbcType="VARCHAR" property="filepath"/>
+        <result column="imageSize" jdbcType="VARCHAR" property="imagesize"/>
+        <result column="imageLen" jdbcType="VARCHAR" property="imagelen"/>
+        <result column="site" jdbcType="VARCHAR" property="site"/>
+        <result column="user_topi_pic" jdbcType="VARCHAR" property="userTopiPic"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , filename, filePath, imageSize, imageLen, site, user_topi_pic
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from img_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="getPic" resultType="com.mystic.ycc.blog.entity.ImgInfo">
+        select id,filename,filePath from img_info where id in
+        <foreach collection="ids" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from img_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.ImgInfo"
+            useGeneratedKeys="true">
+        insert into img_info (filename, filePath, imageSize,
+                              imageLen, site, user_topi_pic)
+        values (#{filename,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, #{imagesize,jdbcType=VARCHAR},
+                #{imagelen,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, #{userTopiPic,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.ImgInfo"
+            useGeneratedKeys="true">
+        insert into img_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="filename != null">
+                filename,
+            </if>
+            <if test="filepath != null">
+                filePath,
+            </if>
+            <if test="imagesize != null">
+                imageSize,
+            </if>
+            <if test="imagelen != null">
+                imageLen,
+            </if>
+            <if test="site != null">
+                site,
+            </if>
+            <if test="userTopiPic != null">
+                user_topi_pic,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="filename != null">
+                #{filename,jdbcType=VARCHAR},
+            </if>
+            <if test="filepath != null">
+                #{filepath,jdbcType=VARCHAR},
+            </if>
+            <if test="imagesize != null">
+                #{imagesize,jdbcType=VARCHAR},
+            </if>
+            <if test="imagelen != null">
+                #{imagelen,jdbcType=VARCHAR},
+            </if>
+            <if test="site != null">
+                #{site,jdbcType=VARCHAR},
+            </if>
+            <if test="userTopiPic != null">
+                #{userTopiPic,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mystic.ycc.blog.entity.ImgInfo">
+        update img_info
+        <set>
+            <if test="filename != null">
+                filename = #{filename,jdbcType=VARCHAR},
+            </if>
+            <if test="filepath != null">
+                filePath = #{filepath,jdbcType=VARCHAR},
+            </if>
+            <if test="imagesize != null">
+                imageSize = #{imagesize,jdbcType=VARCHAR},
+            </if>
+            <if test="imagelen != null">
+                imageLen = #{imagelen,jdbcType=VARCHAR},
+            </if>
+            <if test="site != null">
+                site = #{site,jdbcType=VARCHAR},
+            </if>
+            <if test="userTopiPic != null">
+                user_topi_pic = #{userTopiPic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mystic.ycc.blog.entity.ImgInfo">
+        update img_info
+        set filename      = #{filename,jdbcType=VARCHAR},
+            filePath      = #{filepath,jdbcType=VARCHAR},
+            imageSize     = #{imagesize,jdbcType=VARCHAR},
+            imageLen      = #{imagelen,jdbcType=VARCHAR},
+            site          = #{site,jdbcType=VARCHAR},
+            user_topi_pic = #{userTopiPic,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    
+    <select id="getImgPathFromIds" resultType="java.lang.String">
+        select filePath from img_info where id in
+        <foreach collection="ids" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

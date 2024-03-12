@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mystic.ycc.blog.dao.MenuDao">
+    <resultMap id="BaseResultMap" type="com.mystic.ycc.blog.entity.Menu">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="id_delete" jdbcType="INTEGER" property="idDelete"/>
+        <result column="asName" jdbcType="VARCHAR" property="asname"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , `name`, avatar, id_delete, asName
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from menu
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from menu
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.Menu"
+            useGeneratedKeys="true">
+        insert into menu (`name`, avatar, id_delete,
+                          asName)
+        values (#{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{idDelete,jdbcType=INTEGER},
+                #{asname,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.Menu"
+            useGeneratedKeys="true">
+        insert into menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="idDelete != null">
+                id_delete,
+            </if>
+            <if test="asname != null">
+                asName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="idDelete != null">
+                #{idDelete,jdbcType=INTEGER},
+            </if>
+            <if test="asname != null">
+                #{asname,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mystic.ycc.blog.entity.Menu">
+        update menu
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="idDelete != null">
+                id_delete = #{idDelete,jdbcType=INTEGER},
+            </if>
+            <if test="asname != null">
+                asName = #{asname,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mystic.ycc.blog.entity.Menu">
+        update menu
+        set `name`    = #{name,jdbcType=VARCHAR},
+            avatar    = #{avatar,jdbcType=VARCHAR},
+            id_delete = #{idDelete,jdbcType=INTEGER},
+            asName    = #{asname,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getMenu" resultMap="BaseResultMap">
+        select *
+        from menu
+    </select>
+</mapper>

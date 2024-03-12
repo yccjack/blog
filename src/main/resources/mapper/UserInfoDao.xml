@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mystic.ycc.blog.dao.UserInfoDao">
+    <resultMap id="BaseResultMap" type="com.mystic.ycc.blog.entity.UserInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="lever" jdbcType="INTEGER" property="lever"/>
+        <result column="leverTitle" jdbcType="VARCHAR" property="levertitle"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="topicCount" jdbcType="INTEGER" property="topiccount"/>
+        <result column="comment" jdbcType="INTEGER" property="comment"/>
+        <result column="focusOn" jdbcType="INTEGER" property="focuson"/>
+        <result column="fan" jdbcType="INTEGER" property="fan"/>
+        <result column="leverId" jdbcType="INTEGER" property="leverid"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="sign" jdbcType="VARCHAR" property="sign"/>
+        <result column="user_top_pic" jdbcType="VARCHAR" property="userTopPic"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , `name`, lever, leverTitle, avatar, topicCount, `comment`, focusOn, fan, leverId,
+    email, `password`, nickname, create_time, sign, user_top_pic
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from user_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.UserInfo"
+            useGeneratedKeys="true">
+        insert into user_info (`name`, lever, leverTitle,
+                               avatar, topicCount, `comment`,
+                               focusOn, fan, leverId,
+                               email, `password`, nickname,
+                               create_time, sign, user_top_pic)
+        values (#{name,jdbcType=VARCHAR}, #{lever,jdbcType=INTEGER}, #{levertitle,jdbcType=VARCHAR},
+                #{avatar,jdbcType=VARCHAR}, #{topiccount,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER},
+                #{focuson,jdbcType=INTEGER}, #{fan,jdbcType=INTEGER}, #{leverid,jdbcType=INTEGER},
+                #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{sign,jdbcType=VARCHAR}, #{userTopPic,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.UserInfo"
+            useGeneratedKeys="true">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="lever != null">
+                lever,
+            </if>
+            <if test="levertitle != null">
+                leverTitle,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="topiccount != null">
+                topicCount,
+            </if>
+            <if test="comment != null">
+                `comment`,
+            </if>
+            <if test="focuson != null">
+                focusOn,
+            </if>
+            <if test="fan != null">
+                fan,
+            </if>
+            <if test="leverid != null">
+                leverId,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="userTopPic != null">
+                user_top_pic,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="lever != null">
+                #{lever,jdbcType=INTEGER},
+            </if>
+            <if test="levertitle != null">
+                #{levertitle,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="topiccount != null">
+                #{topiccount,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=INTEGER},
+            </if>
+            <if test="focuson != null">
+                #{focuson,jdbcType=INTEGER},
+            </if>
+            <if test="fan != null">
+                #{fan,jdbcType=INTEGER},
+            </if>
+            <if test="leverid != null">
+                #{leverid,jdbcType=INTEGER},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="userTopPic != null">
+                #{userTopPic,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mystic.ycc.blog.entity.UserInfo">
+        update user_info
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="lever != null">
+                lever = #{lever,jdbcType=INTEGER},
+            </if>
+            <if test="levertitle != null">
+                leverTitle = #{levertitle,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="topiccount != null">
+                topicCount = #{topiccount,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                `comment` = #{comment,jdbcType=INTEGER},
+            </if>
+            <if test="focuson != null">
+                focusOn = #{focuson,jdbcType=INTEGER},
+            </if>
+            <if test="fan != null">
+                fan = #{fan,jdbcType=INTEGER},
+            </if>
+            <if test="leverid != null">
+                leverId = #{leverid,jdbcType=INTEGER},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sign != null">
+                sign = #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="userTopPic != null">
+                user_top_pic = #{userTopPic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mystic.ycc.blog.entity.UserInfo">
+        update user_info
+        set `name`       = #{name,jdbcType=VARCHAR},
+            lever        = #{lever,jdbcType=INTEGER},
+            leverTitle   = #{levertitle,jdbcType=VARCHAR},
+            avatar       = #{avatar,jdbcType=VARCHAR},
+            topicCount   = #{topiccount,jdbcType=INTEGER},
+            `comment`    = #{comment,jdbcType=INTEGER},
+            focusOn      = #{focuson,jdbcType=INTEGER},
+            fan          = #{fan,jdbcType=INTEGER},
+            leverId      = #{leverid,jdbcType=INTEGER},
+            email        = #{email,jdbcType=VARCHAR},
+            `password`   = #{password,jdbcType=VARCHAR},
+            nickname     = #{nickname,jdbcType=VARCHAR},
+            create_time  = #{createTime,jdbcType=TIMESTAMP},
+            sign         = #{sign,jdbcType=VARCHAR},
+            user_top_pic = #{userTopPic,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getUserInfoByNameAndPwd" resultMap="BaseResultMap">
+        select *
+        from user_info
+        where name = #{username}
+          and password = #{password}
+    </select>
+
+    <delete id="hasSameNameUser">
+        select count(name) form user_info where name = #{username}
+    </delete>
+</mapper>

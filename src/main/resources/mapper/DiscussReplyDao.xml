@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mystic.ycc.blog.dao.DiscussReplyDao">
+  <resultMap id="BaseResultMap" type="com.mystic.ycc.blog.entity.DiscussReply">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="reply_content" jdbcType="VARCHAR" property="replyContent" />
+    <result column="discuss_id" jdbcType="INTEGER" property="discussId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="sub_like" jdbcType="INTEGER" property="subLike" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="to_user" jdbcType="INTEGER" property="toUser" />
+    <result column="to_username" jdbcType="VARCHAR" property="toUsername" />
+    <result column="imgs" jdbcType="VARCHAR" property="imgs" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, reply_content, discuss_id, user_id, sub_like, create_time, to_user, to_username, 
+    imgs
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from discuss_reply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from discuss_reply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.DiscussReply" useGeneratedKeys="true">
+    insert into discuss_reply (reply_content, discuss_id, user_id, 
+      sub_like, create_time, to_user, 
+      to_username, imgs)
+    values (#{replyContent,jdbcType=VARCHAR}, #{discussId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{subLike,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{toUser,jdbcType=INTEGER}, 
+      #{toUsername,jdbcType=VARCHAR}, #{imgs,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.DiscussReply" useGeneratedKeys="true">
+    insert into discuss_reply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="replyContent != null">
+        reply_content,
+      </if>
+      <if test="discussId != null">
+        discuss_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="subLike != null">
+        sub_like,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="toUser != null">
+        to_user,
+      </if>
+      <if test="toUsername != null">
+        to_username,
+      </if>
+      <if test="imgs != null">
+        imgs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="replyContent != null">
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="discussId != null">
+        #{discussId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="subLike != null">
+        #{subLike,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toUser != null">
+        #{toUser,jdbcType=INTEGER},
+      </if>
+      <if test="toUsername != null">
+        #{toUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="imgs != null">
+        #{imgs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mystic.ycc.blog.entity.DiscussReply">
+    update discuss_reply
+    <set>
+      <if test="replyContent != null">
+        reply_content = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="discussId != null">
+        discuss_id = #{discussId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="subLike != null">
+        sub_like = #{subLike,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toUser != null">
+        to_user = #{toUser,jdbcType=INTEGER},
+      </if>
+      <if test="toUsername != null">
+        to_username = #{toUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="imgs != null">
+        imgs = #{imgs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mystic.ycc.blog.entity.DiscussReply">
+    update discuss_reply
+    set reply_content = #{replyContent,jdbcType=VARCHAR},
+      discuss_id = #{discussId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      sub_like = #{subLike,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      to_user = #{toUser,jdbcType=INTEGER},
+      to_username = #{toUsername,jdbcType=VARCHAR},
+      imgs = #{imgs,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
