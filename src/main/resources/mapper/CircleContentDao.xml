@@ -28,16 +28,16 @@
     <select id="getCircleContent" resultType="com.mystic.ycc.blog.bean.CircleContentVo">
         select a.*, b.avatar, b.nickname, b.leverTitle, ci.introduction
         from circle_content a
-                 left join
+                 inner join
              user_info b on a.userId = b.id
-                 left join circle_info ci on a.type = ci.id
+                 inner join circle_info ci on a.type = ci.id
         where a.type = #{type}
         order by id desc
     </select>
     <select id="getUserContent" resultType="com.mystic.ycc.blog.bean.CircleContentVo">
         select a.*, b.introduction
         from circle_content a
-                 left join
+                 inner join
              circle_info b on a.type = b.id
         where a.userId = #{userId}
         order by id desc

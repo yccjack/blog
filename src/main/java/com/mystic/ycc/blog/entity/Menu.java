@@ -17,7 +17,7 @@ public class Menu implements Serializable {
 
     private Integer idDelete;
 
-    private String asname;
+    private String asName;
 
     private static final long serialVersionUID = 1L;
 }

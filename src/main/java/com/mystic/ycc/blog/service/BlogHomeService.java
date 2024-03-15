@@ -195,6 +195,7 @@ public class BlogHomeService {
         circleInfoDao.insert(circleInfo);
     }
 
+    @Transactional
     public void saveReply(Integer currentId, ReplySaveVo replySaveVo) {
         Integer discuss_id = replySaveVo.getDiscuss_id();
         Discuss has = discussDao.selectByPrimaryKey(discuss_id);

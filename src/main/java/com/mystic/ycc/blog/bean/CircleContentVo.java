@@ -1,14 +1,18 @@
 package com.mystic.ycc.blog.bean;
 
 import com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 @Data
 public class CircleContentVo {
+
+    static SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 文章ID
@@ -23,7 +27,7 @@ public class CircleContentVo {
     /**
      * 文章标题
      */
-    private String contenttitle;
+    private String contentTitle;
     /**
      * 文章图片名称集合
      */
@@ -61,7 +65,7 @@ public class CircleContentVo {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String create_time;
     /**
      * 作者头像
      */
@@ -94,8 +98,13 @@ public class CircleContentVo {
 
     public void setContentpic(String contentpic) {
         this.contentpic = contentpic;
-        if(!StringUtil.isNullOrEmpty(contentpic)){
+        if (!StringUtil.isNullOrEmpty(contentpic)) {
             this.pics = Arrays.asList(contentpic.split(","));
         }
+    }
+
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = sf.format(create_time);
     }
 }

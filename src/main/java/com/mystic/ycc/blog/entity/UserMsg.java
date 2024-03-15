@@ -22,14 +22,14 @@ public class UserMsg implements Serializable {
      * 0:系统通知，1：文章回复我的，2：手动的赞，3：@我的
 4：讨论回复我的
      */
-    private Integer msgType;
+    private Integer msgType=0;
 
     /**
      * 0:未读，1：已读
      */
-    private Integer isRead;
+    private Integer isRead=0;
 
-    private Date createTime;
+    private Date createTime=new Date();
 
     private Integer contentId;
 

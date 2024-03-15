@@ -6,11 +6,11 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
         <result column="id_delete" jdbcType="INTEGER" property="idDelete"/>
-        <result column="asName" jdbcType="VARCHAR" property="asname"/>
+        <result column="asname" jdbcType="VARCHAR" property="asName"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , `name`, avatar, id_delete, asName
+        , `name`, avatar, id_delete, asname
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -26,9 +26,9 @@
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.Menu"
             useGeneratedKeys="true">
         insert into menu (`name`, avatar, id_delete,
-                          asName)
+                          asname)
         values (#{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{idDelete,jdbcType=INTEGER},
-                #{asname,jdbcType=VARCHAR})
+                #{asName,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mystic.ycc.blog.entity.Menu"
             useGeneratedKeys="true">
@@ -43,8 +43,8 @@
             <if test="idDelete != null">
                 id_delete,
             </if>
-            <if test="asname != null">
-                asName,
+            <if test="asName != null">
+                asname,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -57,8 +57,8 @@
             <if test="idDelete != null">
                 #{idDelete,jdbcType=INTEGER},
             </if>
-            <if test="asname != null">
-                #{asname,jdbcType=VARCHAR},
+            <if test="asName != null">
+                #{asName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -74,8 +74,8 @@
             <if test="idDelete != null">
                 id_delete = #{idDelete,jdbcType=INTEGER},
             </if>
-            <if test="asname != null">
-                asName = #{asname,jdbcType=VARCHAR},
+            <if test="asName != null">
+                asName = #{asName,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -85,7 +85,7 @@
         set `name`    = #{name,jdbcType=VARCHAR},
             avatar    = #{avatar,jdbcType=VARCHAR},
             id_delete = #{idDelete,jdbcType=INTEGER},
-            asName    = #{asname,jdbcType=VARCHAR}
+            asName    = #{asName,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 

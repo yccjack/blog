@@ -16,7 +16,7 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
                 .allowCredentials(false)
                 //放行哪些原始域
                 .allowedOrigins("*")
-                .allowedMethods(new String[]{"GET", "POST", "PUT", "DELETE"})
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .exposedHeaders("*");
     }
