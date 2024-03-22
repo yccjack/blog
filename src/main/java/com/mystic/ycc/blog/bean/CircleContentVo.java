@@ -1,8 +1,7 @@
 package com.mystic.ycc.blog.bean;
 
-import com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -98,7 +97,7 @@ public class CircleContentVo {
 
     public void setContentpic(String contentpic) {
         this.contentpic = contentpic;
-        if (!StringUtil.isNullOrEmpty(contentpic)) {
+        if (StringUtils.isNotEmpty(contentpic)) {
             this.pics = Arrays.asList(contentpic.split(","));
         }
     }

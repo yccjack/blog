@@ -5,15 +5,8 @@ server:
 spring:
   application:
     name: blog
-  cloud:
-    nacos:
-      discovery:
-        namespace: public
-        password: 123456
-        server-addr: 10.0.0.129:8848
-        username: admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 123456
-    url: jdbc:mysql://10.0.0.128:3306/ycc?serverTimezone=GMT%2B8&characterEncoding=utf-8
-    username: root
+    password: JtE75WpELXL8dyKs
+    url: jdbc:mysql://42.192.209.81:3306/vue_mys?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: vue_mys

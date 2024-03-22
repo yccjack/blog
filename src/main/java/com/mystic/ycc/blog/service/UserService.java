@@ -1,6 +1,5 @@
 package com.mystic.ycc.blog.service;
 
-import com.alibaba.nacos.common.utils.CollectionUtils;
 import com.mystic.ycc.blog.bean.*;
 import com.mystic.ycc.blog.config.ContentConfig;
 import com.mystic.ycc.blog.dao.*;
@@ -9,9 +8,11 @@ import com.mystic.ycc.blog.entity.UserInfo;
 import com.mystic.ycc.blog.entity.UserMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class UserService {
     public UserMsgVo getUserMsg(Integer userId) {
         List<UserMsgCount> userMsgCount = userMsgDao.getUserMsgCount(userId);
         UserMsgVo userMsgVo = new UserMsgVo();
-        if (CollectionUtils.isNotEmpty(userMsgCount)) {
+        if (!CollectionUtils.isEmpty(userMsgCount)) {
             userMsgCount.forEach(p -> {
 
                 switch (p.getType()) {
@@ -102,7 +103,7 @@ public class UserService {
 
     public List<DiscussVo> getDiscuss(Integer contentId) {
         List<DiscussVo> discuss = userMsgDao.getDiscuss(contentId);
-        if (CollectionUtils.isNotEmpty(discuss)) {
+        if (!CollectionUtils.isEmpty(discuss)) {
             discuss.forEach(p -> {
                 String imgs = p.getImgs();
                 List<String> imgIds = Arrays.asList(imgs.split(","));
@@ -110,7 +111,7 @@ public class UserService {
                 p.setPics(imgInfos);
                 Integer id = p.getId();
                 List<DiscussReplyVo> reply = getReply(id, 2);
-                if (CollectionUtils.isNotEmpty(reply)) {
+                if (!CollectionUtils.isEmpty(reply)) {
                     p.setReplyList(reply);
                     p.setTotalReply(reply.size());
                 }
