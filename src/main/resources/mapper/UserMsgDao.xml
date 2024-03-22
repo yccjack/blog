@@ -150,7 +150,7 @@
     <select id="getUserMsgCount" resultType="com.mystic.ycc.blog.bean.UserMsgCount">
         select count(1) as count,msg_type as type
         from user_msg
-        where user_id = #{userId}
+        where user_id = #{userId} and is_read = 0
         group by msg_type
     </select>
 
@@ -187,7 +187,18 @@
         update user_msg
         set is_read=1
         where user_id = #{currentUser}
-          and msg_type = #{type}
+          <choose>
+              <when test="type==1">
+                  and msg_type in(1,4)
+              </when>
+          <when test="type==4">
+              and msg_type in(1,4)
+          </when>
+          <otherwise>
+              and msg_type = #{type}
+          </otherwise>
+          </choose>
+
     </update>
 
     <delete id="readMsg">
