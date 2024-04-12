@@ -102,7 +102,7 @@
 
     <select id="getConfig" resultType="com.mystic.ycc.blog.bean.ConfigVo">
         <if test="type==4">
-            select a.id,b.introduction as content,a.type,a.avatar,a.content as id from config a left join
+            select a.content as id,b.introduction as content,a.type,a.avatar from config a left join
             circle_info b on a.content = b.id where a.type=4
         </if>
         <if test="type!=4">

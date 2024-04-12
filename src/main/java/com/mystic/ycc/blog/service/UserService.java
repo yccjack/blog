@@ -110,12 +110,16 @@ public class UserService {
                 List<String> imgInfos = imgService.getImgPathFromIds(imgIds);
                 p.setPics(imgInfos);
                 Integer id = p.getId();
-                List<DiscussReplyVo> reply = getReply(id, 2);
-                if (!CollectionUtils.isEmpty(reply)) {
-                    p.setReplyList(reply);
-                    p.setTotalReply(reply.size());
+                //查询此讨论的回复内容，（目前只查询最老的2条数据，可以根据计算获取最火的2条数据）
+                List<DiscussReplyVo> discussReplyVos = userMsgDao.getDiscussReply(p.getId());
+
+                if (!CollectionUtils.isEmpty(discussReplyVos)) {
+                    int replyCount = userMsgDao.countDiscussReplyByDiscussId(p.getId());
+                    p.setReplyList(discussReplyVos);
+                    p.setTotalReply(replyCount);
                 }
             });
+
 
         }
         return discuss;
@@ -134,7 +138,7 @@ public class UserService {
     }
 
     public UserInfo getUserInfoByNameAndPwd(String username, String password) {
-        return userInfoDao.getUserInfoByNameAndPwd(username,password);
+        return userInfoDao.getUserInfoByNameAndPwd(username, password);
     }
 
     public int hasSameNameUser(String username) {
