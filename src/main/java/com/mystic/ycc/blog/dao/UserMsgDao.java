@@ -36,6 +36,11 @@ public interface UserMsgDao {
 
     String getUserNickname(Integer userId);
 
+    List<DiscussReplyVo> getDiscussReply(@Param("discussId") Integer discussId);
+
+    int countDiscussReplyByDiscussId(@Param("discussId") Integer discussId);
+
+
     List<DiscussReplyVo> getDiscussReplyByDiscussId(@Param("discussId") Integer discussId);
 
     int countDiscussReply(@Param("discussId") Integer discussId);

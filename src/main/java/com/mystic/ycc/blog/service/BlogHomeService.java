@@ -210,14 +210,14 @@ public class BlogHomeService {
             if (!StringUtils.isBlank(pics)) {
                 List<String> imgPathFromIds = imgService.getImgPathFromIds(Arrays.asList(pics.split(",")));
                 reply.setImgs(String.join(",", imgPathFromIds));
-                reply.setReplyContent(replySaveVo.getReplyContent());
-                reply.setUserId(currentId);
-                reply.setCreateTime(new Date());
-                reply.setDiscussId(discuss_id);
-                reply.setToUser(userId);
-                reply.setToUsername(nickname);
-                discussReplyDao.insert(reply);
             }
+            reply.setReplyContent(replySaveVo.getReplyContent());
+            reply.setUserId(currentId);
+            reply.setCreateTime(new Date());
+            reply.setDiscussId(discuss_id);
+            reply.setToUser(userId);
+            reply.setToUsername(nickname);
+            discussReplyDao.insert(reply);
             UserMsg userMsg= new UserMsg();
             userMsg.setUserId(userId);
             userMsg.setFromUserId(currentId);
