@@ -110,10 +110,11 @@ public class UserService {
                 List<String> imgInfos = imgService.getImgPathFromIds(imgIds);
                 p.setPics(imgInfos);
                 Integer id = p.getId();
-                List<DiscussReplyVo> reply = getReply(id, 2);
+                List<DiscussReplyVo> reply = userMsgDao.getDiscussReplyByDiscussId(id);
                 if (!CollectionUtils.isEmpty(reply)) {
+                    int count = userMsgDao.countDiscussReply(id);
                     p.setReplyList(reply);
-                    p.setTotalReply(reply.size());
+                    p.setTotalReply(count);
                 }
             });
 

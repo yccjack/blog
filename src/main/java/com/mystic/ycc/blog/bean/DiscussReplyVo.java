@@ -13,7 +13,7 @@ public class DiscussReplyVo {
 
     private Integer id;
 
-    private String replyContent;
+    private String reply_content;
 
     private Integer discussId;
 

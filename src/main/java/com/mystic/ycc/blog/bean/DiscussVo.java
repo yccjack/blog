@@ -13,7 +13,7 @@ public class DiscussVo {
     /**
      * 发起讨论的内容
      */
-    private String discussContent;
+    private String discuss_content;
 
     /**
      * 发起讨论关联的文章id
