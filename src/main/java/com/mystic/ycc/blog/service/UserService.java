@@ -7,12 +7,12 @@ import com.mystic.ycc.blog.entity.CircleInfo;
 import com.mystic.ycc.blog.entity.UserInfo;
 import com.mystic.ycc.blog.entity.UserMsg;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +36,9 @@ public class UserService {
 
     @Autowired
     ImgService imgService;
+
+    @Value("${user.default.pwd}")
+    private String userDefaultPwd;
 
 
     public UserMsgVo getUserMsg(Integer userId) {
