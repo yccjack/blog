@@ -40,4 +40,8 @@ public interface UserMsgDao {
 
     int countDiscussReplyByDiscussId(@Param("discussId") Integer discussId);
 
+
+    List<DiscussReplyVo> getDiscussReplyByDiscussId(@Param("discussId") Integer discussId);
+
+    int countDiscussReply(@Param("discussId") Integer discussId);
 }

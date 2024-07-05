@@ -228,6 +228,21 @@
         select nickname
         from user_info where id= #{userId}
     </select>
+    <select id="getDiscussReplyByDiscussId" resultType="com.mystic.ycc.blog.bean.DiscussReplyVo">
+        select a.*, b.avatar, b.nickname, b.name, b.leverTitle, b.lever, b.id as avatar_id
+        from discuss_reply a
+                 left join user_info b on
+            a.user_id = b.id
+        where a.discuss_id = #{discussId}
+        order by id desc
+        limit 2
+
+    </select>
+    <select id="countDiscussReply" resultType="java.lang.Integer">
+        select count(1)
+        from discuss_reply
+        where discuss_id = #{discussId}
+    </select>
     <select id="getDiscussReply" resultType="com.mystic.ycc.blog.bean.DiscussReplyVo">
         select a.*,b.avatar,b.nickname,b.name,b.leverTitle,b.lever,b.id as avatar_id
         from discuss_reply a left join user_info b on

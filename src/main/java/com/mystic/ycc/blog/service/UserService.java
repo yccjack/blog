@@ -123,7 +123,6 @@ public class UserService {
                 }
             });
 
-
         }
         return discuss;
     }
@@ -141,7 +140,7 @@ public class UserService {
     }
 
     public UserInfo getUserInfoByNameAndPwd(String username, String password) {
-        return userInfoDao.getUserInfoByNameAndPwd(username, password);
+        return userInfoDao.getUserInfoByNameAndPwd(username,password);
     }
 
     public int hasSameNameUser(String username) {
