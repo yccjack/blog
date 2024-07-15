@@ -98,7 +98,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.mystic.ycc.blog.BlogApplication</mainClass>
-                    <skip>true</skip>
+                    <skip>false</skip>
                 </configuration>
                 <executions>
                     <execution>
